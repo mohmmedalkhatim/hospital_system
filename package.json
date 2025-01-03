@@ -1,0 +1,19 @@
+{
+  "name": "note",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server":"npm run start --prefix backend",
+    "client":"npm run build --prefix frontend",
+    "server:dev":"npm run start:dev --prefix backend",
+    "client:dev":"npm run dev --prefix frontend",
+    "start": "concurrently \"npm run client\" \" npm run server\"",
+    "dev": "concurrently \"npm run client:dev\" \" npm run server:dev\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react-icons": "^5.1.0"
+  }
+}
