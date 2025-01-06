@@ -10,10 +10,45 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-  ID  String @default(uuid()) @unique @id
-  Name String @unique
-  Email String @unique
-  Password String 
-  Created DateTime @default(now())
+model Doctor {
+  Id          String    @id @unique @default(uuid())
+  Name        String
+  Email       String    @unique
+  Password    String
+  birthDate   DateTime
+  sessions    Session[]
+  Doctor_role String
+}
+
+model Patient {
+  Id        String    @id @unique @default(uuid())
+  Name      String
+  birthDate DateTime
+  records   Record[]
+  sessions  Session[]
+}
+
+model Record {
+  Id         String   @id @unique @default(uuid())
+  patient_id String
+  files      Bytes
+  Patient    Patient? @relation(fields: [patientId], references: [Id])
+  patientId  String?
+}
+
+model Session {
+  Id        String   @id @unique @default(uuid())
+  time      DateTime
+  Doctor    Doctor?  @relation(fields: [doctorId], references: [Id])
+  doctorId  String?
+  Patient   Patient? @relation(fields: [patientId], references: [Id])
+  patientId String?
+}
+
+model admie {
+  ID       String   @id @unique @default(uuid())
+  Name     String   @unique
+  Email    String   @unique
+  Password String
+  Created  DateTime @default(now())
 }
