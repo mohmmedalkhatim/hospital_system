@@ -9,10 +9,11 @@ import { DoctorModule } from './Doctor/Doctor.module'
 import { RecordModule } from './record/record.module';
 import { PatientModule } from './patient/patient.module';
 import { SessionModule } from './session/session.module';
+import { AdmieModule } from './admie/admie.module';
 
 @Module({
   providers: [{ provide: APP_GUARD, useClass: AuthGuard }],
   controllers: [],
-  imports: [AuthModule,DoctorModule, JwtModule.register({ secret: env.secret }), RecordModule, PatientModule, SessionModule, ],
+  imports: [AuthModule,DoctorModule, JwtModule.register({ secret: env.secret }), RecordModule, PatientModule, SessionModule, AdmieModule, ],
 })
 export class AppModule {}
