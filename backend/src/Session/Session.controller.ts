@@ -1,18 +1,34 @@
-import { Controller, Get } from "@nestjs/common";
-import {Param} from '@nestjs/common'
-import SessionService from "./Session.service";
-import PrimsaSerivce from "src/prisma/prisma.service";
-import { Prisma } from "prisma/prisma-client";
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { SessionService } from './session.service';
+import { CreateSessionDto } from './dto/create-session.dto';
+import { UpdateSessionDto } from './dto/update-session.dto';
 
+@Controller('sessions')
+export class SessionController {
+  constructor(private readonly sessionService: SessionService) {}
 
+  @Post()
+  create(@Body() createSessionDto: CreateSessionDto) {
+    return this.sessionService.create(createSessionDto);
+  }
 
-@Controller("/Session")
-class Session {
-    constructor(prisma:PrimsaSerivce){}
+  @Get()
+  findAll() {
+    return this.sessionService.findAll();
+  }
 
-    @Get("")
-    one(@Param("id") id:String,){
-        Prisma.
-    }
-    
-} export default Session;
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.sessionService.findOne(id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateSessionDto: UpdateSessionDto) {
+    return this.sessionService.update(id, updateSessionDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.sessionService.remove(id);
+  }
+}
