@@ -1,9 +1,9 @@
-import { Module } from "@nestjs/common";
-
-
-
+import { Module } from '@nestjs/common';
+import { PatientService } from './patient.service';
+import { PatientController } from './patient.controller';
 
 @Module({
-  provider:[]
+  controllers: [PatientController],
+  providers: [PatientService]
 })
-export default class PatientModule{}
+export class PatientModule {}
